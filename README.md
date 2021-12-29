@@ -12,9 +12,16 @@
 
 将以上提到的文件添加进系统的自动执行策略里，就可以实现动态更新自己的域名到阿里云的解析上了。
 
+Linux 增加开机启动的方法：
+```bash
+# 把aliyun_ddns 解压到 /home/scripts/ ，并修改好config.json ，然后执行下面命令
+vim /etc/rc.local
+nohup /home/scripts/aliyun_ddns &
+```
+
 系统额外增加了定时检查ip机制，每半小时校对一次ip如果ip变化了，则执行更新
 
-## 配置文件说明
+## 配置文件说明：
 需要同步的配置内容在config.json文件内，此文件需要同执行文件放在同一目录下
 
 

@@ -6,13 +6,16 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"unicode/utf8"
 )
 
 func initPath() {
 	sep := string(os.PathSeparator)
-	ExecPath, _ = os.Getwd()
+	ExecPath, _ = os.Executable()
+	ExecPath = filepath.Dir(ExecPath)
+
 	pathArray := strings.Split(ExecPath, "/")
 	if strings.Contains(ExecPath, "\\") {
 		pathArray = strings.Split(ExecPath, "\\")
