@@ -2,10 +2,7 @@ module github.com/fesiong/aliyun-ddns
 
 go 1.17
 
-require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1411
-	github.com/robfig/cron/v3 v3.0.1
-)
+require github.com/aliyun/alibaba-cloud-sdk-go v1.61.1411
 
 require (
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
