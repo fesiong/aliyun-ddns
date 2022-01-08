@@ -4,31 +4,21 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/alidns"
-	"github.com/robfig/cron/v3"
 	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
-
+	"time"
 )
 
 var LastIp string
 
 func main() {
 	log.Println("自动更新阿里云dns程序正在执行：")
-	Crond()
-
-	select {
-	//保持业务不停止
+	for {
+		CheckUpdateDns()
+		time.Sleep(20 * time.Minute)
 	}
-}
-
-func Crond() {
-	//开机的时候执行一次
-	CheckUpdateDns()
-	//每20分钟读取一次
-	crontab := cron.New(cron.WithSeconds())
-	crontab.AddFunc("1 */20 * * * *", CheckUpdateDns)
 }
 
 func GetInternetIp() string {
@@ -72,6 +62,8 @@ func CheckUpdateDns() {
 			log.Println("更新本地公网IP失败：", err.Error())
 			DebugLog("ddns", fmt.Sprintf("更新本地公网IP失败：%s", err.Error()))
 		}
+	} else {
+		log.Println("本次地址未更新：", newIp)
 	}
 }
 
